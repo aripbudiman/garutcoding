@@ -25,12 +25,13 @@
     <title>{{ $title }}</title>
 </head>
 
-<body class="bg-light flex flex-col h-full">
+<body class="bg-bg flex flex-col h-full">
     <header
         class="flex flex-wrap sm:justify-start sm:flex-nowrap fixed z-50 w-full bg-lightblue text-sm py-1 dark:bg-white">
         <nav class="max-w-[1140px] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between" aria-label="Global">
             <div class="flex items-center justify-between">
-                <a class="flex-none text-xl xl:text-2xl font-bublegum font-semibold text-white hover:text-gelap hover:transition-all hover:delay-75"
+                <a href="/"
+                    class="flex-none text-xl xl:text-2xl font-bublegum font-semibold text-white hover:text-gelap hover:transition-all hover:delay-75"
                     href="#"><i class="fa-solid fa-laptop-code"></i>
                     Garut Coding</a>
                 <div class="sm:hidden">
@@ -53,23 +54,24 @@
             <div id="navbar-dark"
                 class="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block">
                 <div class="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:pl-5">
-                    <a class="font-medium text-white xl:text-lg font-nunito hover:text-gelap" href="#"
+                    <a class="font-medium text-white xl:text-lg font-nunito hover:text-gelap" href="/"
                         aria-current="page">Home</a>
                     <a class="font-medium text-white xl:text-lg font-nunito hover:text-gelap dark:text-gelap dark:hover:text-gray-400"
-                        href="#">Tutorial</a>
+                        href="{{ route('tutorial.index') }}">Tutorial</a>
                     <a class="font-medium text-white xl:text-lg font-nunito hover:text-gelap dark:text-gelap dark:hover:text-gray-400"
                         href="#">About</a>
                     <a class="font-medium text-white xl:text-lg font-nunito hover:text-gelap dark:text-gelap dark:hover:text-gray-400"
                         href="#">Contact</a>
                     <div class="flex flex-row items-center justify-end gap-2">
-                        @if (Auth::check())
                         <div class="hs-dropdown relative inline-flex" data-hs-dropdown-placement="bottom-right">
                             <button id="hs-dropdown-with-header" type="button"
                                 class="hs-dropdown-toggle inline-flex flex-shrink-0 justify-center items-center gap-2 h-[3.375rem] w-[3.375rem] rounded-full font-medium  text-gray-700 align-middle transition-all text-xs dark:bg-gray-800 dark:hover:bg-slate-800 dark:text-gray-400 dark:hover:text-white dark:focus:ring-gray-700 dark:focus:ring-offset-gray-800">
                                 <img class="inline-block h-[2.375rem] w-[2.375rem] rounded-full ring-2 ring-white dark:ring-gelap"
-                                    src="{{ asset(Auth::user()->path_profile) }}" alt="Image Description">
+                                    src=" @if (Auth::check()) {{ asset(Auth::user()->path_profile) }} @else {{ asset('assets/user.png') }} @endif"
+                                    alt="Image Description">
                             </button>
 
+                            @if (Auth::check())
                             <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-[15rem] z-10 bg-white shadow-md rounded-lg p-2 dark:bg-gray-800 dark:border dark:border-gray-700"
                                 aria-labelledby="hs-dropdown-with-header">
                                 <div class="py-3 px-5 -m-2 bg-gray-100 rounded-t-lg dark:bg-gray-700">
@@ -91,7 +93,7 @@
                                         Dashboard
                                     </a>
                                     @endif
-                                    <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gelap hover:bg-gelap/5 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
+                                    <a class="flex items-center gap-x-3.5 px-3 rounded-md text-sm text-gelap hover:bg-gelap/5 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
                                         href="#">
                                         <i class="fa-regular fa-user"></i>
                                         Profile

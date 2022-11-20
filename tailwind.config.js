@@ -31,6 +31,7 @@ module.exports = {
             'white':'#ffffff',
             'lightblue':'#0ea5e9',
             'light':'#F9FBFE',
+            'bg':'#f3f4f6',
             'kuning':'#f7df1e',
             'merah':'#fe372a',
             'blue': colors.blue,

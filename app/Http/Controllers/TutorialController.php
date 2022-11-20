@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use App\Models\Category;
-class CategoryController extends Controller
+use Illuminate\Http\Request;
+
+class TutorialController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category=Category::all();
-        return view('category.index',['title'=>'Category'],compact('category'));
+        $categories=Category::withCount('posts')->get();
+        
+        return view('tutorial.index',['title'=>'Tutorial'],compact('categories'));
     }
 
     /**
@@ -25,7 +26,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('category.create',['title'=>'Create Category']);
+        //
     }
 
     /**
@@ -36,20 +37,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name'=>['required','unique:category']
-        ]);
-
-        $file = $request->file('logo');
-        $logo = $file->getClientOriginalName();
-        $tujuan='category';
-        $file->move($tujuan,$logo);
-        
-        $category = new Category();
-        $category->name = $request->name;
-        $category->logo = $tujuan.'/'.$logo;
-        $category->save();
-        return redirect()->route('category.index')->with('success','Category berhasil ditambahkan!');
+        //
     }
 
     /**
@@ -94,7 +82,11 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        Category::destroy($id);
-        return redirect()->route('category.index')->with('success','Category berhasil dihapus!');
+        //
+    }
+
+    public function showArtikel($id, Request $request){
+        $categories = Category::where('id',$id)->with('posts')->first();
+        return view('tutorial.showArtikel',['title'=>'List Artikel'],compact('categories'));
     }
 }

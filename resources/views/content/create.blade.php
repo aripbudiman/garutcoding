@@ -15,15 +15,6 @@
             @enderror
         </div>
         <div class="mb-4">
-            <label for="slug" class="block text-sm font-medium mb-2 dark:text-white">Slug</label>
-            <input type="text" id="slug" name="slug"
-                class="py-3 px-4 block w-full border-gray-200 @error('slug') border-red-500 border-2 @enderror rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
-                placeholder="your slug post">
-            @error('slug')
-            <p class="text-sm text-red-500 mt-2" id="hs-input-helper-text">{{ $message }}</p>
-            @enderror
-        </div>
-        <div class="mb-4">
             <label for="category" class="block text-sm font-medium mb-2 dark:text-white">Category</label>
             <select id="category" name="category"
                 class="py-3 px-4 pr-9 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400">
@@ -60,18 +51,6 @@
 </div>
 <script>
     var editor1 = new RichTextEditor("#content_text");
-
-    $('#title').change(function (e) {
-        // alert($('#title').val())
-        $.get('{{ url('
-            check_slug ') }}', {
-                'title': $('#title').val()
-            },
-            function (data) {
-                $('#slug').val(data.slug);
-            }
-        );
-    });
 
 </script>
 @endsection

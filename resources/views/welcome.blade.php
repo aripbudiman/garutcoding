@@ -35,7 +35,7 @@
 </div>
 <!-- ========== END HEADER ========== -->
 <main class="mt-20 mx-auto w-full xl:w-[1140px]">
-    <div class="kategori bg-light pb-10" id="kategori">
+    <div class="kategori bg-bg pb-10" id="kategori">
         <h2 class="text-xl xl:text-2xl text-lightblue font-bublegum pl-5 pt-5 pb-2"><i
                 class="fa-solid fa-book text-gelap"></i>
             Kategori
@@ -84,7 +84,7 @@
             </a>
         </div>
     </div>
-    <div class="terupdate bg-light" id="terupdate">
+    <div class="terupdate bg-bg" id="terupdate">
         <h2 class=" text-xl xl:text-2xl text-lightblue font-bublegum pl-5 pt-5 pb-2"><i
                 class="fa-regular fa-newspaper text-gelap"></i>
             Terupdate</h2>

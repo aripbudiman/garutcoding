@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug');
             $table->integer('id_category');
-            $table->text('content_text');
+            $table->longText('content_text');
             $table->text('cover');
             $table->dateTime('published');
             $table->timestamps();

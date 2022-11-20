@@ -12,7 +12,11 @@ class Category extends Model
     protected $table = 'category';
 
     protected $fillable = [
-        'name'
+        'name','logo'
     ];
     public $timestamps = false;
+
+    public function posts(){
+        return $this->hasMany(Post::class,'id_category');
+    }
 }

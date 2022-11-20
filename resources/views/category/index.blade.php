@@ -54,6 +54,8 @@
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name
                             </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Logo
+                            </th>
                             <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">
                                 Action</th>
                         </tr>
@@ -65,11 +67,13 @@
                         @foreach ($category as $item)
                         <tr class="hover:bg-gray-100">
                             <td
-                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
+                                class="px-6 py-2 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
                                 {{ $no++ }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
+                            <td class="px-6 py-2 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
                                 {{ $item->name }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                            <td class="px-6 py-2 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
+                                <img src="{{ asset($item->logo) }}" class="w-12"></td>
+                            <td class="px-6 py-2 whitespace-nowrap text-right text-sm font-medium">
                                 <form action="{{ route('category.destroy',$item->id) }}" method="post">
                                     @csrf
                                     @method('DELETE')
