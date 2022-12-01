@@ -18,8 +18,8 @@ class Post extends Model
     public $timestamps = true;
 
 
-    public function PostComment(){
-        return $this->hasMany(PostComment::class);
+    public function Comments(){
+        return $this->hasMany(Comments::class);
     }
 
     public function User(){

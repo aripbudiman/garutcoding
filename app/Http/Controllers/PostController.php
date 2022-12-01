@@ -62,8 +62,6 @@ class PostController extends Controller
         $post->content_text=$request->content_text;
         $post->cover=$tujuan.'/'.$tes;
         $post->published=date('Y-m-d H:i:s');
-        $post->created_at=date('Y-m-d H:i:s');
-        $post->updated_at=date('Y-m-d H:i:s');
         $post->save();
         return redirect()->route('post.index')->with('success','Postingan has been successfully uploaded');
     }

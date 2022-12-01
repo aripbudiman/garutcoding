@@ -107,7 +107,7 @@
                         <img class="inline-block h-[1.5rem] w-[1.5rem] rounded-full ring-2 ring-white dark:ring-gelap"
                             src="{{ asset($post->user->path_profile) }}" alt="Image Description">
                         {{ $post->user->name }} <i class="fa-regular fa-clock"></i>
-                        {{ date('d M Y',strtotime($post->published)) }}
+                        {{ date('d F Y',strtotime($post->published)) }}
                     </p>
                 </div>
             </a>

@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{csrf_token()}}" />
     {{-- font family --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,6 +22,7 @@
     {{-- icon --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     @vite('resources/css/app.css')
+    @vite('resources/css/hightliter.css')
     @vite('resources/js/app.js')
     <title>{{ $title }}</title>
 </head>
@@ -75,10 +77,10 @@
                             <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-[15rem] z-10 bg-white shadow-md rounded-lg p-2 dark:bg-gray-800 dark:border dark:border-gray-700"
                                 aria-labelledby="hs-dropdown-with-header">
                                 <div class="py-3 px-5 -m-2 bg-gray-100 rounded-t-lg dark:bg-gray-700">
-                                    <p class="text-sm text-gray-500 dark:text-gray-400">Signed in as</p>
+                                    {{-- <p class="text-sm text-gray-500 dark:text-gray-400">Signed in as</p> --}}
                                     <p class="text-sm font-medium text-gray-800 dark:text-gray-300">
                                         @if (Auth::check() == 1)
-                                        {{ Auth::user()->email }}</p>
+                                        {{ Auth::user()->name }}</p>
                                     @else
                                     <a href="{{ route('login') }}" class="text-biru font-nunito underline">Anda belum
                                         login</a>
@@ -93,11 +95,15 @@
                                         Dashboard
                                     </a>
                                     @endif
-                                    <a class="flex items-center gap-x-3.5 px-3 rounded-md text-sm text-gelap hover:bg-gelap/5 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
-                                        href="#">
-                                        <i class="fa-regular fa-user"></i>
-                                        Profile
-                                    </a>
+                                    <form action="{{ route('edit_profile',Auth::id()) }}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                            class="flex items-center gap-x-3.5 px-3 rounded-md text-sm text-gelap hover:bg-gelap/5 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300">
+                                            <i class="fa-regular fa-user"></i>
+                                            Profile
+                                        </button>
+                                    </form>
                                     <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gelap hover:bg-gelap/5 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
                                         href="#">
                                         <svg class="flex-none" width="16" height="16" viewBox="0 0 16 16"

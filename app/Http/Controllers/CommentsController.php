@@ -2,23 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
-use App\Models\User;
-use Illuminate\Support\Str;
+use App\Models\Comments;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
-class HomeController extends Controller
+class CommentsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    // public function index()
-    // {
-    //     return view();
-    // }
+    public function index()
+    {
+        //
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -36,10 +36,30 @@ class HomeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Comments $comments)
     {
-        //
+        
+        if(!Auth::check()){
+            return response()->json('login');
+        }
+        $validasi = Validator::make($request->all(),[
+            'idPost'=>'required',
+            'comment'=>'required'
+        ],[
+            'comment.required'=>'komentar tidak boleh kosong'
+        ]);
+
+        if($validasi->fails()){
+            return response()->json(['errors'=>$validasi->errors()]);
+        }else{
+            $comments->author_id = Auth::id();
+            $comments->post_id = $request->idPost;
+            $comments->text_comment = $request->comment;
+            $comments->save();
+            return response()->json(['success'=>'Komentar berhasil dikirim']);
+        }
     }
+
 
     /**
      * Display the specified resource.
@@ -49,9 +69,7 @@ class HomeController extends Controller
      */
     public function show($id)
     {
-        $post = Post::where('slug',$id)->first();
-        
-        return view('content.show',['title'=>$post->title],compact('post'));
+        //
     }
 
     /**
@@ -74,17 +92,7 @@ class HomeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $users = user::findOrFail($id);
-        $name = Str::random(15) . '.';
-        $ext = $request->image->extension();
-        if($ext === null){
-            return 'kosong';
-        }
-        $fullname = 'assets/'.$name.$ext;
-        $users->path_profile = $fullname;
-        $users->save();
-        $request->image->move('assets',$name.$ext);
-        return redirect('/');
+        //
     }
 
     /**
@@ -95,14 +103,6 @@ class HomeController extends Controller
      */
     public function destroy($id)
     {
-        $users =User::findOrFail($id);
-        
-        return view('auth.profile',['title'=>'Profile'],compact('users'));
-    }
-
-    public function edit_profile($id){
-        $users =User::findOrFail($id);
-        
-        return view('auth.profile',['title'=>'Profile'],compact('users'));
+        //
     }
 }

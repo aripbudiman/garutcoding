@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('post_comment',function(Blueprint $table){
+        Schema::create('reactions',function(Blueprint $table){
             $table->id();
             $table->integer('author_id');
             $table->integer('post_id');
-            $table->text('text_comment');
+            $table->text('react');
             $table->timestamps();
         });
     }
